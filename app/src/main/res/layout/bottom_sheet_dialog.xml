@@ -98,7 +98,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
 
-            android:id="@+id/saved"
+            android:id="@+id/edit"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/delete"
@@ -115,7 +115,7 @@
             android:id="@+id/share"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/saved"
+            app:layout_constraintLeft_toRightOf="@id/edit"
             app:layout_constraintRight_toRightOf="parent"
             android:src="@drawable/ic_baseline_share_24"
             android:backgroundTint="#E8D31B"

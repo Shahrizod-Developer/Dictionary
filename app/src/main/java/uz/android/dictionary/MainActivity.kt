@@ -25,8 +25,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: RecyclerAdapter
     private lateinit var words: RoomWords
-    private lateinit var wortdLists: ArrayList<RoomWords>
-    private  lateinit var dbHelper: RoomDbHelper
+    private lateinit var uniqueWord: HashSet<RoomWords>
+    private lateinit var dbHelper: RoomDbHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         dbHelper = RoomDbHelper.DatabaseBuilder.getInstance(this)
         setAdapter(dbHelper.roomDao().getAllWords())
-
 
         binding.add.setOnClickListener {
 
@@ -53,28 +53,63 @@ class MainActivity : AppCompatActivity() {
             }
             saqla.setOnClickListener {
 
-                if(eng.text.toString().isNotEmpty() && uz.text.toString().isNotEmpty() && ru.text.toString().isNotEmpty()) {
-                        words = RoomWords(
-                                wordeng = eng.text.toString(),
-                                worduz = uz.text.toString(),
-                                wordru = ru.text.toString())
-                        dbHelper.roomDao().inset(words)
-                        Toast.makeText(this, "Word added", Toast.LENGTH_SHORT).show()
-                        setAdapter(dbHelper.roomDao().getAllWords())
-                        dialog.cancel()
+                if (eng.text.toString().isNotEmpty() && uz.text.toString().isNotEmpty() && ru.text.toString().isNotEmpty()) {
 
-                }
-                else{
+
+                    words = RoomWords(
+                            wordeng = eng.text.toString(),
+                            worduz = uz.text.toString(),
+                            wordru = ru.text.toString())
+                    dbHelper.roomDao().inset(words)
+                    Toast.makeText(this, "Word added", Toast.LENGTH_SHORT).show()
+                    setAdapter(dbHelper.roomDao().getAllWords())
+                    dialog.cancel()
+                } else {
                     Toast.makeText(this, "Iltimos hamma maydonlarni to'ldiring", Toast.LENGTH_SHORT).show()
                 }
             }
-
             dialog.setView(dialogView)
             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
             dialog.show()
         }
     }
 
+    private fun showDialog(words: RoomWords) {
+        val dialog = AlertDialog.Builder(this).create()
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.add_word_dialog, null, false)
+
+        val saqla = dialogView.findViewById<Button>(R.id.save)
+        val yop = dialogView.findViewById<Button>(R.id.cancel)
+        val eng = dialogView.findViewById<EditText>(R.id.wordeng)
+        val uz = dialogView.findViewById<EditText>(R.id.wordeuz)
+        val ru = dialogView.findViewById<EditText>(R.id.wordru)
+
+        eng.setText(words.wordeng)
+        uz.setText(words.worduz)
+        ru.setText(words.wordru)
+
+        yop.setOnClickListener {
+            dialog.cancel()
+        }
+        saqla.setOnClickListener {
+
+            if (eng.text.toString().isNotEmpty() && uz.text.toString().isNotEmpty() && ru.text.toString().isNotEmpty()) {
+                words.wordeng = eng.text.toString()
+                words.worduz = uz.text.toString()
+                words.wordru = ru.text.toString()
+                dbHelper.roomDao().update(words)
+                Toast.makeText(this, "Word changed", Toast.LENGTH_SHORT).show()
+                setAdapter(dbHelper.roomDao().getAllWords())
+                dialog.cancel()
+            } else {
+                Toast.makeText(this, "Iltimos hamma maydonlarni to'ldiring", Toast.LENGTH_SHORT).show()
+            }
+        }
+        dialog.setView(dialogView)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+
+    }
     private fun showBottomSheetDialog(words: RoomWords) {
         val dbHelper: RoomDbHelper = RoomDbHelper.DatabaseBuilder.getInstance(this)
         val dialog = BottomSheetDialog(this)
@@ -84,12 +119,19 @@ class MainActivity : AppCompatActivity() {
         dialogView.maqolru.text = words.wordru
         val ochir = dialogView.findViewById<FloatingActionButton>(R.id.delete)
         val jonat = dialogView.findViewById<FloatingActionButton>(R.id.share)
+        val tahrir = dialogView.findViewById<FloatingActionButton>(R.id.edit)
         ochir.setOnClickListener {
 
             dbHelper.roomDao().delete(words)
             setAdapter(dbHelper.roomDao().getAllWords())
             Toast.makeText(this, "Word deleted", Toast.LENGTH_SHORT).show()
             dialog.cancel()
+        }
+        tahrir.setOnClickListener {
+
+            dialog.cancel()
+            showDialog(words)
+
         }
         jonat.setOnClickListener {
             val intent= Intent()
@@ -101,12 +143,10 @@ class MainActivity : AppCompatActivity() {
         dialog.setContentView(dialogView)
         dialog.show()
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId)
@@ -119,7 +159,6 @@ class MainActivity : AppCompatActivity() {
                 setAdapter(sortedBy)
             }
         }
-
         return true
     }
     private fun setAdapter(list: List<RoomWords>) {
@@ -132,6 +171,5 @@ class MainActivity : AppCompatActivity() {
         {
             binding.text.visibility = View.GONE
         }
-
     }
 }

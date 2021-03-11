@@ -18,4 +18,7 @@ interface RoomDao {
 
     @Delete
     fun delete(roomWords: RoomWords)
+
+    @Update
+    fun update(roomWords: RoomWords)
 }
