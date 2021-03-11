@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/back_style"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+
+        android:id="@+id/maqoleng"
+        app:layout_constraintVertical_bias="0.1"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:text="dfjfgjlkjfgkjdfbkdj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+
+        android:id="@+id/chiziq1"
+        android:background="@color/black"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_width="25dp"
+        android:layout_height="2dp"
+        android:orientation="horizontal" />
+
+
+    <TextView
+
+        android:id="@+id/maqoluz"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:text="dfjfgjlkjfgkjdfbkdj"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+
+        android:id="@+id/chiziq2"
+        android:background="@color/black"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_width="25dp"
+        android:layout_height="2dp"
+        android:orientation="horizontal" />
+
+
+    <TextView
+
+        android:id="@+id/maqolru"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:text="dfjfgjlkjfgkjdfbkdj"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_width="300dp"
+        android:background="@color/black"
+        android:layout_height="1dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_height="60dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+            android:id="@+id/delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:backgroundTint="#03A9F4"
+            app:layout_constraintHorizontal_bias="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+            android:id="@+id/saved"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/delete"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:backgroundTint="#90E330"
+            app:layout_constraintHorizontal_bias="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+            android:id="@+id/share"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/saved"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_baseline_share_24"
+            android:backgroundTint="#E8D31B"
+            app:layout_constraintHorizontal_bias="0.38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</LinearLayout>
