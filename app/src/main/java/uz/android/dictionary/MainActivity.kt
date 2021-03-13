@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: RecyclerAdapter
     private lateinit var words: RoomWords
-    private lateinit var uniqueWord: HashSet<RoomWords>
     private lateinit var dbHelper: RoomDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             saqla.setOnClickListener {
 
                 if (eng.text.toString().isNotEmpty() && uz.text.toString().isNotEmpty() && ru.text.toString().isNotEmpty()) {
-
 
                     words = RoomWords(
                             wordeng = eng.text.toString(),
@@ -108,7 +106,6 @@ class MainActivity : AppCompatActivity() {
         dialog.setView(dialogView)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.show()
-
     }
     private fun showBottomSheetDialog(words: RoomWords) {
         val dbHelper: RoomDbHelper = RoomDbHelper.DatabaseBuilder.getInstance(this)
@@ -136,8 +133,9 @@ class MainActivity : AppCompatActivity() {
         jonat.setOnClickListener {
             val intent= Intent()
             intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,words.wordeng)
-            intent.type="text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, words.wordeng)
+
+            intent.type = "text/plain"
             startActivity(Intent.createChooser(intent,"Share To:"))
         }
         dialog.setContentView(dialogView)
