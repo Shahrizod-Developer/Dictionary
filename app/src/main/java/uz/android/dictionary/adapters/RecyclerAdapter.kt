@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.android.dictionary.R
 import uz.android.dictionary.models.RoomWords
 
+
 class RecyclerAdapter(var list: List<RoomWords>, val onClick: (words: RoomWords, position: Int) -> Unit):
         RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
             inner class ViewHolder(itemview: View): RecyclerView.ViewHolder(itemview){
+
                 private val wordeng: TextView = itemview.findViewById(R.id.wordeng1)
+
                 fun onBind(words: RoomWords, position: Int){
                     wordeng.text = words.wordeng
                     itemView.setOnClickListener{
