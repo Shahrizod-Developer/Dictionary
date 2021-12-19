@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
 
+
    <TextView
        android:id="@+id/text"
        app:layout_constraintTop_toTopOf="parent"
